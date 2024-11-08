@@ -1,0 +1,7 @@
+{
+  "name": "RegistAPP_parcial2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

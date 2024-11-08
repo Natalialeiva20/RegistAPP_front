@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@zxing/browser": "^0.1.5",
+    "ngx-scanner-qrcode": "^1.6.9"
+  }
+}

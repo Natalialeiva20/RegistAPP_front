@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clases de la Sección {{ sectionId }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button expand="full" (click)="presentClassNamePrompt()">Iniciar Clase</ion-button>
+
+  <h2>Clases por Fecha</h2>
+  <ion-list>
+    <!-- Iteramos sobre las fechas agrupadas -->
+    <ion-item-group *ngFor="let date of getGroupedClassDates()">
+      <ion-item-divider>
+        <ion-label>{{ date }}</ion-label>
+      </ion-item-divider>
+      <!-- Iteramos sobre las clases dentro de cada fecha -->
+      <ion-item *ngFor="let classItem of groupedClasses[date]">
+        <ion-label>
+          <h3>{{ classItem.nombre_class }}</h3>
+          <p>Profesor: {{ classItem.profesor_nombre }}</p>
+          
+        </ion-label>
+
+        <!-- Mostrar el botón "Generar QR" solo si la clase es del último día -->
+        <ion-button *ngIf="date === lastDate && qrData !== classItem.class_id" (click)="toggleQR(classItem.class_id)">
+          Generar QR
+        </ion-button>
+
+        <!-- Mostrar el QR y el botón "Cerrar QR" solo si el QR está abierto -->
+        <div *ngIf="qrData === classItem.class_id" class="qr-container">
+          <qr-code [value]="classItem.class_id" size="200"></qr-code>
+          <ion-button color="danger" (click)="toggleQR(classItem.class_id)" expand="block" size="small">
+            Cerrar QR
+          </ion-button>
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+

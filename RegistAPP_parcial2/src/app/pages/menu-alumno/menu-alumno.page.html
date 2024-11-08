@@ -1,0 +1,45 @@
+<!-- Menú lateral -->
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list>
+      <!-- Ítem del menú para restablecer la contraseña -->
+      <ion-item button (click)="navigateToChangePassword()">
+        Restablecer Contraseña
+      </ion-item>
+      <!-- Otros ítems del menú -->
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!-- Contenido principal -->
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menú del Alumno</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <h2>Bienvenido, {{ userName }}</h2>
+    <h3>Mis Secciones Registradas</h3>
+
+    <div *ngIf="sections.length === 0">No hay secciones registradas para mostrar.</div>
+
+    <ion-list *ngIf="sections.length > 0">
+      <ion-item *ngFor="let section of sections" (click)="goToSectionAttendance(section.section_id)">
+        <ion-label>
+          <h2>{{ section.nombre_seccion }}</h2>
+          <p>{{ section.nombre_asignatura }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</div>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Video para el escáner QR -->
+  <video #videoElement autoplay muted playsinline style="width: 100%; height: auto;"></video>
+
+  <!-- Botón para iniciar y detener el escaneo -->
+  <ion-button expand="full" color="primary" (click)="isScanning ? stopScan() : startScan()">
+    {{ isScanning ? 'Detener Escaneo' : 'Iniciar Escaneo' }}
+  </ion-button>
+  <ion-item>
+    <ion-label>Filtrar por Fecha</ion-label>
+    <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="selectedDate" (ionChange)="filterAttendancesByDate()">
+    </ion-datetime>
+  </ion-item>
+  <!-- Lista de asistencias -->
+  <h3>Registro de Asistencia</h3>
+  <ion-list>
+    <ion-item *ngFor="let attendance of filteredAttendances">
+      <ion-label>
+        <h2>{{ attendance.nombre_class }}</h2>
+        <p>Fecha de clase: {{ formatDate(attendance.fecha_clase) }}</p>
+        <p>Hora: {{ formatTime(attendance.fecha_clase) }}</p>
+        <p>Estado: {{ attendance.estado }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/menu-alumno"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
